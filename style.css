@@ -12,10 +12,12 @@ body {
 }
 
 #card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 460px;
   height: 260px;
-  max-width: 90vw;
-  position: relative;
+  transform: translate(-50%, -50%);
   z-index: 2;
 }
 
@@ -365,6 +367,6 @@ body {
 
 @media (max-width: 500px) {
   #card {
-    transform: scale(0.75);
+    transform: translate(-50%, -50%) scale(0.75);
   }
 }
