@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday!</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+
+    <style>
+
+        /* --- GLOBAL STYLES --- */
+
+        body, html {
+
+            margin: 0;
+
+            padding: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            overflow: hidden; /* Prevents scrolling */
+
+            font-family: "Comic Sans MS", "Comic Sans", cursive; /* Primary Font */
+
+        }
+
+
+        /* Helper to center everything */
+
+        .stage {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            display: none; /* Hidden by default */
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            background-size: cover; /* Cover for wallpapers */
+
+            background-position: center;
+
+        }
+
+
+        /* Show the active stage */
+
+        .stage.active {
+
+            display: flex;
+
+        }
+
+
+        /* Button Styling */
+
+        .btn {
+
+            background-color: white;
+
+            border: 2px solid black;
+
+            border-radius: 50px; /* Pill shape */
+
+            padding: 10px 30px;
+
+            font-family: 'Fredoka', sans-serif;
+
+            font-size: 1.2rem;
+
+            color: black;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            transition: transform 0.1s;
+
+            margin-top: 15px;
+
+            user-select: none;
+
+        }
+
+
+        .btn:active {
+
+            transform: scale(0.95);
+
+        }
+
+
+        /* Image sizing helpers */
+
+        img {
+
+            max-width: 90%;
+
+            height: auto;
+
+        }
+
+
+        /* --- STAGE 1 --- */
+
+        #stage1 {
+
+            background-image: url('star bg.jpg');
+
+            background-repeat: repeat; /* Repeating star pattern */
+
+        }
+
+
+        /* Typewriter Animation Class */
+
+        .typing-text {
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            margin: 0 auto 20px auto;
+
+            letter-spacing: .15em;
+
+            animation: typing 2.5s steps(40, end);
+
+        }
+
+
+        @keyframes typing {
+
+            from { width: 0 }
+
+            to { width: 100% }
+
+        }
+
+
+        #stage1 h1 {
+
+            font-size: 2.5rem;
+
+            margin-bottom: 20px;
+
+        }
+
+       
+
+        #miffy-stage-1 {
+
+            width: 300px; /* Medium Size */
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* --- STAGE 2 --- */
+
+        #stage2 {
+
+            background-image: url('star bg.jpg');
+
+            background-repeat: repeat;
+
+        }
+
+
+        #stage2 h2 {
+
+            font-size: 2rem;
+
+            font-weight: bold;
+
+            line-height: 1.5;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .button-container {
+
+            display: flex;
+
+            gap: 20px; /* Space between buttons */
+
+            margin-bottom: 30px;
+
+        }
+
+
+        #miffy-stage-2 {
+
+            width: 250px; /* Medium Size */
+
+        }
+
+
+        /* --- STAGE 3 --- */
+
+        #stage3 {
+
+            /* Background handled by video element */
+
+            position: relative;
+
+        }
+
+
+        /* Fullscreen Video Background */
+
+        .video-bg {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            z-index: -1;
+
+        }
+
+
+        /* Container to stack items on top of the GIF */
+
+        .box-container {
+
+            position: relative;
+
+            width: 90%;
+
+            max-width: 500px; /* Limit width to keep it looking nice */
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        #stage3-box {
+
+            width: 100%;
+
+            display: block;
+
+        }
+
+
+        #cake-btn {
+
+            position: absolute;
+
+            width: 100px; /* Small but clickable */
+
+            top: 55%; /* Positioned visually below the text in the GIF */
+
+            cursor: pointer;
+
+            transition: transform 0.2s;
+
+            z-index: 10;
+
+        }
+
+       
+
+        #cake-btn:hover {
+
+            transform: scale(1.1);
+
+        }
+
+
+        /* --- STAGE 4 --- */
+
+        #stage4 {
+
+            /* Video BG is shared or duplicated */
+
+        }
+
+
+        #stage4-box {
+
+            width: 100%;
+
+            display: block;
+
+        }
+
+
+        #jellycat-img {
+
+            position: absolute;
+
+            width: 180px; /* Small/Medium */
+
+            top: 45%; /* Adjust based on GIF text "it's a jellycat..." */
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+        }
+
+
+        #wishes-btn {
+
+            position: absolute;
+
+            bottom: 15%; /* Near bottom of the box */
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-weight: bold;
+
+            font-size: 1rem;
+
+            background: white;
+
+            z-index: 10;
+
+        }
+
+
+        /* --- STAGE 5 --- */
+
+        #stage5 {
+
+            background-image: url('dots bg.jpg');
+
+            background-size: cover;
+
+            background-repeat: no-repeat;
+
+        }
+
+
+        #stage5-box {
+
+            width: 90%;
+
+            max-width: 600px; /* Large */
+
+            margin-top: 20px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <div id="stage1" class="stage active">
+
+        <h1 class="typing-text">Happy 20th Birthday!</h1>
+
+        <img src="MIFFY STAGE 1.png" alt="Miffy Birthday" id="miffy-stage-1">
+
+        <button class="btn" onclick="goToStage(2)">next :3</button>
+
+    </div>
+
+
+    <div id="stage2" class="stage">
+
+        <h2 class="typing-text" style="animation-delay: 0.5s;">i have a suprise for <br> you, wanna see it?</h2>
+
+        <div class="button-container">
+
+            <button class="btn" onclick="goToStage(3)">yes!!</button>
+
+            <button class="btn" onclick="alert('You have no choice! :3')">no thanks.</button>
+
+        </div>
+
+        <img src="miffy stage 2.gif" alt="Surprise Miffy" id="miffy-stage-2">
+
+    </div>
+
+
+    <div id="stage3" class="stage">
+
+        <video class="video-bg" autoplay muted loop playsinline>
+
+            <source src="cherry vid bg.mp4" type="video/mp4">
+
+        </video>
+
+       
+
+        <div class="box-container">
+
+            <img src="STAGE 3 BOX.gif" alt="Open Gift" id="stage3-box">
+
+            <img src="CAKE STAGE 3.png" alt="Cake Button" id="cake-btn" onclick="goToStage(4)">
+
+        </div>
+
+    </div>
+
+
+    <div id="stage4" class="stage">
+
+        <video class="video-bg" autoplay muted loop playsinline>
+
+            <source src="cherry vid bg.mp4" type="video/mp4">
+
+        </video>
+
+
+        <div class="box-container">
+
+            <img src="STAGE 4 BOX.gif" alt="Jellycat Box" id="stage4-box">
+
+            <img src="JELLYCAT.png" alt="Jellycat Bunny" id="jellycat-img">
+
+            <button class="btn" id="wishes-btn" onclick="goToStage(5)">my wishes</button>
+
+        </div>
+
+    </div>
+
+
+    <div id="stage5" class="stage">
+
+        <img src="STAGE 5 BOX.gif" alt="Birthday Letter" id="stage5-box">
+
+    </div>
+
+
+    <script>
+
+        // Simple function to handle transitions
+
+        function goToStage(stageNumber) {
+
+            // Hide all stages
+
+            document.querySelectorAll('.stage').forEach(el => el.classList.remove('active'));
+
+           
+
+            // Show the target stage
+
+            const nextStage = document.getElementById('stage' + stageNumber);
+
+            if (nextStage) {
+
+                nextStage.classList.add('active');
+
+            }
+
+
+            // Special Effects for specific stages
+
+           
+
+            // If entering Stage 2, re-trigger the typing animation (optional polish)
+
+            if (stageNumber === 2) {
+
+                const text = nextStage.querySelector('h2');
+
+                text.style.animation = 'none';
+
+                text.offsetHeight; /* trigger reflow */
+
+                text.style.animation = 'typing 3.5s steps(40, end)';
+
+            }
+
+
+            // If entering Stage 4, Trigger Confetti
+
+            if (stageNumber === 4) {
+
+                triggerConfetti();
+
+            }
+
+        }
+
+
+        // Confetti Function
+
+        function triggerConfetti() {
+
+            var duration = 3 * 1000;
+
+            var animationEnd = Date.now() + duration;
+
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+
+            var random = function(min, max) { return Math.random() * (max - min) + min; }
+
+
+            var interval = setInterval(function() {
+
+                var timeLeft = animationEnd - Date.now();
+
+
+                if (timeLeft <= 0) {
+
+                    return clearInterval(interval);
+
+                }
+
+
+                var particleCount = 50 * (timeLeft / duration);
+
+                // since particles fall down, start a bit higher than random
+
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
+
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
+
+            }, 250);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
