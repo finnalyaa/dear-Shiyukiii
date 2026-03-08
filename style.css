@@ -295,13 +295,14 @@ body {
   height: 100%;
   pointer-events: none;
   overflow: hidden;
+  z-index: 0;
 }
 
 .flowers span {
   position: absolute;
   top: -10%;
-  font-size: 28px;
-  animation: fall linear infinite;
+  font-size: 32px;
+  animation: fall 10s linear infinite;
 }
 
 .flowers span:nth-child(1) {
@@ -352,4 +353,9 @@ body {
   100% {
     transform: translateY(110vh) rotate(360deg);
   }
+}
+
+#card {
+  position: relative;
+  z-index: 2;
 }
